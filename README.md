@@ -186,6 +186,10 @@ Enable **Prometheus open monitoring** (JMX + node exporter) for per-topic, per-p
 | `msk_demo.py` | IAM-auth producer + consumer-group consumer, runnable offline in `--demo` mode |
 | `quiz.md` | 5 questions to test what stuck |
 
+## Changelog
+
+- 2026-11-10: Initial guide — provisioned vs Serverless vs Express, partition math, IAM auth, Connect & Replicator.
+
 ---
 
 ## Quiz Teaser
