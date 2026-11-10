@@ -1,0 +1,219 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="960" viewBox="0 0 1120 960" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#232F3E"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#1A6FB5"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#3D9C35"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="1120" height="960" fill="#FFFFFF"/>
+
+  <!-- Title -->
+  <text x="560" y="34" font-size="22" font-weight="bold" fill="#232F3E" text-anchor="middle">Amazon MSK — Managed Streaming for Apache Kafka</text>
+  <text x="560" y="56" font-size="13" fill="#666666" text-anchor="middle">Producers → MSK cluster (3 brokers, RF 3) → consumers → S3 data lake / OpenSearch — replayable, per-partition parallel</text>
+
+  <!-- Producers -->
+  <g>
+    <text x="30" y="110" font-size="14" font-weight="bold" fill="#232F3E">Producers</text>
+    <rect x="30" y="125" width="110" height="64" rx="4" fill="#FF9900" stroke="#CC7A00" stroke-width="1.5"/>
+    <text x="85" y="152" font-size="13" font-weight="bold" fill="#FFFFFF" text-anchor="middle">EC2</text>
+    <text x="85" y="170" font-size="11" fill="#FFFFFF" text-anchor="middle">App servers</text>
+    <rect x="30" y="205" width="110" height="64" rx="4" fill="#FF9900" stroke="#CC7A00" stroke-width="1.5"/>
+    <text x="85" y="232" font-size="13" font-weight="bold" fill="#FFFFFF" text-anchor="middle">EKS</text>
+    <text x="85" y="250" font-size="11" fill="#FFFFFF" text-anchor="middle">Microservices</text>
+    <rect x="30" y="285" width="110" height="64" rx="4" fill="#8C4FFF" stroke="#6B2FD6" stroke-width="1.5"/>
+    <text x="85" y="312" font-size="13" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Debezium</text>
+    <text x="85" y="330" font-size="11" fill="#FFFFFF" text-anchor="middle">CDC from RDS</text>
+  </g>
+
+  <!-- Arrows producers -> MSK -->
+  <line x1="140" y1="157" x2="330" y2="185" stroke="#232F3E" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="205" y="160" font-size="11" fill="#232F3E" text-anchor="middle">Produce</text>
+  <text x="205" y="174" font-size="11" fill="#666666" text-anchor="middle">TLS • IAM auth</text>
+  <line x1="140" y1="237" x2="330" y2="210" stroke="#232F3E" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <line x1="140" y1="317" x2="330" y2="235" stroke="#232F3E" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="205" y="270" font-size="11" fill="#232F3E" text-anchor="middle">acks=all</text>
+  <text x="205" y="284" font-size="11" fill="#666666" text-anchor="middle">idempotent</text>
+
+  <!-- AWS Cloud -->
+  <rect x="330" y="100" width="760" height="820" fill="none" stroke="#232F3E" stroke-width="2"/>
+  <text x="350" y="128" font-size="15" font-weight="bold" fill="#232F3E">AWS Cloud</text>
+  <text x="350" y="146" font-size="11" fill="#666666">Region: ap-southeast-1 — TLS in transit, KMS encryption at rest (customer-managed key)</text>
+
+  <!-- MSK cluster -->
+  <g>
+    <rect x="360" y="160" width="400" height="110" rx="4" fill="#FF9900" stroke="#CC7A00" stroke-width="1.5"/>
+    <text x="560" y="188" font-size="15" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Amazon MSK</text>
+    <text x="560" y="208" font-size="11" fill="#FFFFFF" text-anchor="middle">Managed Streaming for Apache Kafka</text>
+    <text x="560" y="230" font-size="11" fill="#FFFFFF" text-anchor="middle">3 brokers • Kafka 3.7.x • replication factor 3</text>
+    <text x="560" y="250" font-size="11" fill="#FFFFFF" text-anchor="middle">Topic orders — 6 partitions • retention 7 days</text>
+    <text x="560" y="264" font-size="10" fill="#FFE0B2" text-anchor="middle">min.insync.replicas = 2 • acks = all</text>
+  </g>
+
+  <!-- Observability & security -->
+  <g>
+    <rect x="790" y="160" width="270" height="110" rx="4" fill="#FFF3E0" stroke="#FF9900" stroke-width="1.5" stroke-dasharray="5,3"/>
+    <text x="925" y="186" font-size="12" font-weight="bold" fill="#232F3E" text-anchor="middle">Observability &amp; security</text>
+    <rect x="805" y="196" width="115" height="60" rx="4" fill="#FF9900"/>
+    <text x="862" y="222" font-size="11" font-weight="bold" fill="#FFFFFF" text-anchor="middle">CloudWatch</text>
+    <text x="862" y="238" font-size="10" fill="#FFFFFF" text-anchor="middle">Lag + URP alarms</text>
+    <text x="862" y="252" font-size="10" fill="#FFFFFF" text-anchor="middle">Prometheus (JMX)</text>
+    <rect x="930" y="196" width="115" height="60" rx="4" fill="#D32F2F"/>
+    <text x="987" y="222" font-size="11" font-weight="bold" fill="#FFFFFF" text-anchor="middle">KMS</text>
+    <text x="987" y="238" font-size="10" fill="#FFFFFF" text-anchor="middle">Server-side</text>
+    <text x="987" y="252" font-size="10" fill="#FFFFFF" text-anchor="middle">encryption (CMK)</text>
+  </g>
+  <line x1="760" y1="200" x2="790" y2="200" stroke="#232F3E" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Arrow MSK -> VPC -->
+  <line x1="560" y1="270" x2="560" y2="300" stroke="#232F3E" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="572" y="288" font-size="11" fill="#232F3E">1 broker per AZ</text>
+
+  <!-- VPC -->
+  <rect x="360" y="300" width="700" height="470" fill="none" stroke="#3D9C35" stroke-width="2"/>
+  <text x="380" y="326" font-size="14" font-weight="bold" fill="#3D9C35">VPC — brokers &amp; consumers (private subnets, no public IPs)</text>
+
+  <!-- AZ 1 -->
+  <rect x="375" y="340" width="215" height="410" fill="#F2F8FD" stroke="#1A6FB5" stroke-width="1.5" stroke-dasharray="7,4"/>
+  <text x="482" y="364" font-size="13" font-weight="bold" fill="#1A6FB5" text-anchor="middle">Availability Zone 1</text>
+  <rect x="385" y="376" width="195" height="56" rx="4" fill="#E8F5E9" stroke="#3D9C35" stroke-width="1.2"/>
+  <text x="395" y="398" font-size="12" font-weight="bold" fill="#3D9C35">Public subnet</text>
+  <rect x="395" y="406" width="110" height="20" rx="4" fill="#8C4FFF"/>
+  <text x="450" y="420" font-size="11" font-weight="bold" fill="#FFFFFF" text-anchor="middle">NAT Gateway</text>
+  <rect x="385" y="444" width="195" height="104" rx="4" fill="#E3F2FD" stroke="#1A6FB5" stroke-width="1.2"/>
+  <text x="395" y="466" font-size="12" font-weight="bold" fill="#1A6FB5">App subnet</text>
+  <rect x="395" y="476" width="90" height="62" rx="4" fill="#FF9900" stroke="#CC7A00" stroke-width="1.5"/>
+  <text x="440" y="500" font-size="12" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Lambda</text>
+  <text x="440" y="516" font-size="10" fill="#FFFFFF" text-anchor="middle">MSK event source</text>
+  <text x="440" y="530" font-size="10" fill="#FFFFFF" text-anchor="middle">per partition</text>
+  <rect x="490" y="476" width="80" height="62" rx="4" fill="#FF9900" stroke="#CC7A00" stroke-width="1.5"/>
+  <text x="530" y="500" font-size="12" font-weight="bold" fill="#FFFFFF" text-anchor="middle">ECS</text>
+  <text x="530" y="516" font-size="10" fill="#FFFFFF" text-anchor="middle">consumer</text>
+  <text x="530" y="530" font-size="10" fill="#FFFFFF" text-anchor="middle">group</text>
+  <rect x="385" y="560" width="195" height="180" rx="4" fill="#E8F5E9" stroke="#3D9C35" stroke-width="1.2"/>
+  <text x="395" y="582" font-size="12" font-weight="bold" fill="#3D9C35">Data subnet (private)</text>
+  <rect x="395" y="592" width="175" height="66" rx="4" fill="#FF9900" stroke="#CC7A00" stroke-width="1.5"/>
+  <text x="482" y="616" font-size="12" font-weight="bold" fill="#FFFFFF" text-anchor="middle">MSK Broker 1</text>
+  <text x="482" y="632" font-size="10" fill="#FFFFFF" text-anchor="middle">kafka.m5.large • EBS gp3</text>
+  <text x="482" y="646" font-size="10" fill="#FFFFFF" text-anchor="middle">100 GiB • storage autoscale</text>
+  <text x="482" y="680" font-size="11" fill="#232F3E" text-anchor="middle">Partition replicas:</text>
+  <text x="482" y="696" font-size="11" fill="#232F3E" text-anchor="middle">leader + 2 followers</text>
+  <text x="482" y="716" font-size="11" fill="#666666" text-anchor="middle">ZooKeeper-free (KRaft)</text>
+
+  <!-- AZ 2 -->
+  <rect x="600" y="340" width="215" height="410" fill="#F2F8FD" stroke="#1A6FB5" stroke-width="1.5" stroke-dasharray="7,4"/>
+  <text x="707" y="364" font-size="13" font-weight="bold" fill="#1A6FB5" text-anchor="middle">Availability Zone 2</text>
+  <rect x="610" y="376" width="195" height="56" rx="4" fill="#E8F5E9" stroke="#3D9C35" stroke-width="1.2"/>
+  <text x="620" y="398" font-size="12" font-weight="bold" fill="#3D9C35">Public subnet</text>
+  <rect x="620" y="406" width="110" height="20" rx="4" fill="#8C4FFF"/>
+  <text x="675" y="420" font-size="11" font-weight="bold" fill="#FFFFFF" text-anchor="middle">NAT Gateway</text>
+  <rect x="610" y="444" width="195" height="104" rx="4" fill="#E3F2FD" stroke="#1A6FB5" stroke-width="1.2"/>
+  <text x="620" y="466" font-size="12" font-weight="bold" fill="#1A6FB5">App subnet</text>
+  <rect x="620" y="476" width="90" height="62" rx="4" fill="#FF9900" stroke="#CC7A00" stroke-width="1.5"/>
+  <text x="665" y="500" font-size="12" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Lambda</text>
+  <text x="665" y="516" font-size="10" fill="#FFFFFF" text-anchor="middle">standby</text>
+  <text x="665" y="530" font-size="10" fill="#FFFFFF" text-anchor="middle">concurrency</text>
+  <rect x="715" y="476" width="80" height="62" rx="4" fill="#FF9900" stroke="#CC7A00" stroke-width="1.5"/>
+  <text x="755" y="500" font-size="12" font-weight="bold" fill="#FFFFFF" text-anchor="middle">EKS</text>
+  <text x="755" y="516" font-size="10" fill="#FFFFFF" text-anchor="middle">stream</text>
+  <text x="755" y="530" font-size="10" fill="#FFFFFF" text-anchor="middle">processor</text>
+  <rect x="610" y="560" width="195" height="180" rx="4" fill="#E8F5E9" stroke="#3D9C35" stroke-width="1.2"/>
+  <text x="620" y="582" font-size="12" font-weight="bold" fill="#3D9C35">Data subnet (private)</text>
+  <rect x="620" y="592" width="175" height="66" rx="4" fill="#FF9900" stroke="#CC7A00" stroke-width="1.5"/>
+  <text x="707" y="616" font-size="12" font-weight="bold" fill="#FFFFFF" text-anchor="middle">MSK Broker 2</text>
+  <text x="707" y="632" font-size="10" fill="#FFFFFF" text-anchor="middle">kafka.m5.large • EBS gp3</text>
+  <text x="707" y="646" font-size="10" fill="#FFFFFF" text-anchor="middle">100 GiB • storage autoscale</text>
+  <text x="707" y="680" font-size="11" fill="#232F3E" text-anchor="middle">Partition replicas:</text>
+  <text x="707" y="696" font-size="11" fill="#232F3E" text-anchor="middle">leader + 2 followers</text>
+  <text x="707" y="716" font-size="11" fill="#666666" text-anchor="middle">ZooKeeper-free (KRaft)</text>
+
+  <!-- AZ 3 -->
+  <rect x="825" y="340" width="215" height="410" fill="#F2F8FD" stroke="#1A6FB5" stroke-width="1.5" stroke-dasharray="7,4"/>
+  <text x="932" y="364" font-size="13" font-weight="bold" fill="#1A6FB5" text-anchor="middle">Availability Zone 3</text>
+  <rect x="835" y="376" width="195" height="56" rx="4" fill="#E8F5E9" stroke="#3D9C35" stroke-width="1.2"/>
+  <text x="845" y="398" font-size="12" font-weight="bold" fill="#3D9C35">Public subnet</text>
+  <rect x="845" y="406" width="110" height="20" rx="4" fill="#8C4FFF"/>
+  <text x="900" y="420" font-size="11" font-weight="bold" fill="#FFFFFF" text-anchor="middle">NAT Gateway</text>
+  <rect x="835" y="444" width="195" height="104" rx="4" fill="#E3F2FD" stroke="#1A6FB5" stroke-width="1.2"/>
+  <text x="845" y="466" font-size="12" font-weight="bold" fill="#1A6FB5">App subnet</text>
+  <rect x="845" y="476" width="90" height="62" rx="4" fill="#FF9900" stroke="#CC7A00" stroke-width="1.5"/>
+  <text x="890" y="500" font-size="12" font-weight="bold" fill="#FFFFFF" text-anchor="middle">MSK</text>
+  <text x="890" y="516" font-size="10" fill="#FFFFFF" text-anchor="middle">Connect</text>
+  <text x="890" y="530" font-size="10" fill="#FFFFFF" text-anchor="middle">S3 sink</text>
+  <rect x="940" y="476" width="80" height="62" rx="4" fill="#FF9900" stroke="#CC7A00" stroke-width="1.5"/>
+  <text x="980" y="500" font-size="12" font-weight="bold" fill="#FFFFFF" text-anchor="middle">MSK</text>
+  <text x="980" y="516" font-size="10" fill="#FFFFFF" text-anchor="middle">Connect</text>
+  <text x="980" y="530" font-size="10" fill="#FFFFFF" text-anchor="middle">Debezium</text>
+  <rect x="835" y="560" width="195" height="180" rx="4" fill="#E8F5E9" stroke="#3D9C35" stroke-width="1.2"/>
+  <text x="845" y="582" font-size="12" font-weight="bold" fill="#3D9C35">Data subnet (private)</text>
+  <rect x="845" y="592" width="175" height="66" rx="4" fill="#FF9900" stroke="#CC7A00" stroke-width="1.5"/>
+  <text x="932" y="616" font-size="12" font-weight="bold" fill="#FFFFFF" text-anchor="middle">MSK Broker 3</text>
+  <text x="932" y="632" font-size="10" fill="#FFFFFF" text-anchor="middle">kafka.m5.large • EBS gp3</text>
+  <text x="932" y="646" font-size="10" fill="#FFFFFF" text-anchor="middle">100 GiB • storage autoscale</text>
+  <text x="932" y="680" font-size="11" fill="#232F3E" text-anchor="middle">Partition replicas:</text>
+  <text x="932" y="696" font-size="11" fill="#232F3E" text-anchor="middle">leader + 2 followers</text>
+  <text x="932" y="716" font-size="11" fill="#666666" text-anchor="middle">ZooKeeper-free (KRaft)</text>
+
+  <!-- Arrows: broker -> consumers (poll) -->
+  <line x1="440" y1="592" x2="440" y2="548" stroke="#232F3E" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="448" y="572" font-size="11" fill="#232F3E">polls</text>
+  <line x1="665" y1="592" x2="665" y2="548" stroke="#232F3E" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="673" y="572" font-size="11" fill="#232F3E">polls</text>
+  <line x1="890" y1="592" x2="890" y2="548" stroke="#232F3E" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="898" y="572" font-size="11" fill="#232F3E">sinks</text>
+
+  <!-- Bottom band: serving + DR -->
+  <g>
+    <rect x="380" y="800" width="200" height="80" rx="4" fill="#3D9C35" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="480" y="828" font-size="13" font-weight="bold" fill="#FFFFFF" text-anchor="middle">S3 Data Lake</text>
+    <text x="480" y="846" font-size="11" fill="#FFFFFF" text-anchor="middle">Parquet • Athena</text>
+    <text x="480" y="862" font-size="11" fill="#FFFFFF" text-anchor="middle">Glue catalog</text>
+    <rect x="600" y="800" width="200" height="80" rx="4" fill="#1A6FB5" stroke="#0F4C81" stroke-width="1.5"/>
+    <text x="700" y="828" font-size="13" font-weight="bold" fill="#FFFFFF" text-anchor="middle">OpenSearch</text>
+    <text x="700" y="846" font-size="11" fill="#FFFFFF" text-anchor="middle">Search &amp; dashboards</text>
+    <text x="700" y="862" font-size="11" fill="#FFFFFF" text-anchor="middle">Kibana / Grafana</text>
+    <rect x="820" y="800" width="230" height="80" rx="4" fill="#8C4FFF" stroke="#6B2FD6" stroke-width="1.5"/>
+    <text x="935" y="828" font-size="13" font-weight="bold" fill="#FFFFFF" text-anchor="middle">MSK Replicator</text>
+    <text x="935" y="846" font-size="11" fill="#FFFFFF" text-anchor="middle">MirrorMaker 2 → DR region</text>
+    <text x="935" y="862" font-size="11" fill="#FFFFFF" text-anchor="middle">ap-southeast-2 • offsets synced</text>
+  </g>
+  <line x1="482" y1="750" x2="482" y2="800" stroke="#3D9C35" stroke-width="1.8" marker-end="url(#arrowGreen)"/>
+  <text x="492" y="778" font-size="11" fill="#3D9C35">S3 sink connector</text>
+  <line x1="707" y1="750" x2="707" y2="800" stroke="#1A6FB5" stroke-width="1.8" marker-end="url(#arrowBlue)"/>
+  <text x="717" y="778" font-size="11" fill="#1A6FB5">indexes</text>
+  <line x1="932" y1="750" x2="932" y2="800" stroke="#8C4FFF" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="942" y="778" font-size="11" fill="#8C4FFF">replicates</text>
+
+  <!-- Durability rules -->
+  <g>
+    <rect x="30" y="400" width="280" height="130" rx="4" fill="#F5F5F5" stroke="#999999" stroke-width="1"/>
+    <text x="45" y="426" font-size="12" font-weight="bold" fill="#232F3E">Durability rules</text>
+    <text x="45" y="446" font-size="11" fill="#232F3E">• acks=all + min.insync.replicas=2</text>
+    <text x="45" y="462" font-size="11" fill="#232F3E">• enable.idempotence=true</text>
+    <text x="45" y="482" font-size="11" fill="#232F3E">• Commit offsets AFTER processing</text>
+    <text x="45" y="498" font-size="11" fill="#232F3E">• Key records that need ordering</text>
+    <text x="45" y="516" font-size="11" fill="#232F3E">• Storage autoscaling ON, alarm 85%</text>
+  </g>
+
+  <!-- Legend -->
+  <g>
+    <rect x="30" y="560" width="280" height="180" rx="4" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1"/>
+    <text x="45" y="586" font-size="12" font-weight="bold" fill="#232F3E">Legend</text>
+    <rect x="45" y="598" width="22" height="16" fill="#FF9900"/><text x="75" y="611" font-size="11" fill="#232F3E">Compute / streaming (orange)</text>
+    <rect x="45" y="622" width="22" height="16" fill="#1A6FB5"/><text x="75" y="635" font-size="11" fill="#232F3E">Database / search (blue)</text>
+    <rect x="45" y="646" width="22" height="16" fill="#3D9C35"/><text x="75" y="659" font-size="11" fill="#232F3E">Storage / VPC (green)</text>
+    <rect x="45" y="670" width="22" height="16" fill="#8C4FFF"/><text x="75" y="683" font-size="11" fill="#232F3E">Networking / edge (purple)</text>
+    <rect x="45" y="694" width="22" height="16" fill="#D32F2F"/><text x="75" y="707" font-size="11" fill="#232F3E">Security (red)</text>
+    <text x="45" y="730" font-size="11" fill="#666666">Dashed box = Availability Zone</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="560" y="940" font-size="12" fill="#666666" text-anchor="middle">Traffic flow: Producers → MSK cluster (3 brokers, RF 3) → Lambda / ECS / EKS consumers → S3 data lake / OpenSearch • Replicator → DR region</text>
+  <text x="560" y="954" font-size="11" fill="#999999" text-anchor="middle">Style: classic AWS reference architecture — white background, official service colours, dashed AZ boxes, labelled tiered subnets, labelled traffic arrows</text>
+</svg>
